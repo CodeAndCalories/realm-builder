@@ -118,3 +118,84 @@ body{background:var(--bg);color:var(--text);font-family:'Crimson Pro',Georgia,se
 .confirm-btn{flex:1;padding:10px;border-radius:8px;font-family:'Cinzel',serif;font-size:10px;cursor:pointer;border:1px solid var(--border2);letter-spacing:1px;}
 .confirm-btn.yes{background:rgba(224,85,85,.15);color:var(--red);border-color:var(--red);}
 .confirm-btn.no{background:var(--panel);color:var(--text-dim);}
+
+/* ─── Two-panel responsive layout ─────────────────────────────────────── */
+
+/* Mobile base: flex column so we can reorder canvas between speed-bar and tabs.
+   #left-panel uses display:contents — its children are promoted as direct flex
+   items of #app-shell and participate in the same order sequence. */
+#app-shell{display:flex;flex-direction:column;min-height:100vh;}
+#left-panel{display:contents;}
+#right-panel{order:3;}
+#tabs{order:4;}
+#content{order:5;}
+
+/* Desktop: 768px and above */
+@media(min-width:768px){
+  html,body{height:100%;overflow:hidden;}
+
+  /* Outer shell becomes a flex row filling the viewport */
+  #app-shell{flex-direction:row;height:100vh;overflow:hidden;}
+
+  /* Left panel: fixed 340px column, no outer scroll */
+  #left-panel{
+    display:flex;flex-direction:column;
+    width:340px;flex-shrink:0;
+    height:100vh;overflow:hidden;
+    border-right:2px solid var(--border2);
+  }
+
+  /* Header no longer needs sticky — it sits at top of the fixed left column */
+  #header{position:static;}
+
+  /* Tabs no longer need sticky either */
+  #tabs{order:0;position:static;top:auto;}
+
+  /* Content area scrolls within the left panel */
+  #content{order:0;flex:1;overflow-y:auto;padding-bottom:20px;}
+
+  /* Right panel: fills remaining width, full height, clips canvas overflow */
+  #right-panel{order:0;flex:1;height:100vh;overflow:hidden;}
+
+  /* Canvas wrap expands to fill the entire right panel */
+  #city-canvas-wrap{height:100%;border-bottom:none;}
+
+  /* ── Header & resource bar ── */
+  #header{padding:14px 20px 10px;}
+  #header h1{font-size:22px;letter-spacing:4px;}
+  #resource-bar{flex-wrap:wrap;gap:8px;}
+  .res-chip{flex-shrink:1;}
+  #speed-bar{padding:8px 20px;}
+  .spd-btn{font-size:11px;padding:5px 14px;}
+  .tick-display{font-size:10px;}
+
+  /* ── Building grid: 3 columns on desktop ── */
+  .building-grid{grid-template-columns:repeat(3,1fr);gap:10px;}
+  .bld-count{width:22px;height:22px;font-size:10px;}
+
+  /* ── Larger text & cards for desktop readability ── */
+  body{font-size:16px;}
+  .bld-name{font-size:12px;}
+  .bld-desc{font-size:11px;}
+  .bld-prod{font-size:11px;}
+  .cost-tag{font-size:10px;}
+  .bld-icon{font-size:32px;}
+  .bld-card{padding:14px 12px;}
+  .sec-title{font-size:15px;}
+  .res-val{font-size:13px;}
+  .res-chip{font-size:13px;padding:5px 12px;}
+  .tab{font-size:11px;padding:12px 8px;}
+  .tab .ti{font-size:18px;}
+  .stat-val-big{font-size:28px;}
+  .shop-name{font-size:12px;}
+  .shop-desc{font-size:11px;}
+  .log-entry{font-size:13px;}
+  .event-title{font-size:14px;}
+  .event-desc{font-size:13px;}
+  .evt-btn{font-size:14px;}
+}
+
+/* Very wide screens: 4-column building grid */
+@media(min-width:1200px){
+  .building-grid{grid-template-columns:repeat(4,1fr);}
+}
