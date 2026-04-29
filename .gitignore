@@ -1,3 +1,36 @@
+# OS files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
 Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor folders
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
 *.log
+npm-debug.log*
+
+# If Node ever gets added later
+node_modules/
+package-lock.json
+
+# Temp / build (future proofing)
+dist/
+build/
+.cache/
+
+# Environment (future proofing)
+.env
+.env.local
+.env.*
+
+# Claude Code
+.claude/

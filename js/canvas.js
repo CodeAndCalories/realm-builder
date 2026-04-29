@@ -14,7 +14,7 @@ function generateSprites(){
   all.forEach(b=>{
     const bw=Math.max(16,Math.min(36,18+rnd(0,14))),bh=Math.max(22,Math.min(60,26+rnd(0,28)));
     if(x+bw>W-8) x=10+rnd(0,15);
-    buildingSprites.push({x:x+rnd(-2,2),y:groundY-bh,w:bw,h:bh,color:colorMap[b.cat],roof:roofMap[b.cat]});
+    buildingSprites.push({x:x+rnd(-2,2),y:groundY-bh,w:bw,h:bh,color:colorMap[b.cat],roof:roofMap[b.cat],emoji:b.icon});
     x+=bw+rnd(2,7);
   });
 }
@@ -43,6 +43,8 @@ function renderCity(){
     ctx.fillStyle=isNight?'#ffdd88':'#b0cce8';
     const rows=Math.max(1,Math.floor(bs.h/14));
     for(let r=0;r<rows;r++){ctx.fillRect(bs.x+3,bs.y+5+r*11,3,4);if(bs.w>18)ctx.fillRect(bs.x+bs.w-7,bs.y+5+r*11,3,4);}
+    ctx.font=`${Math.max(10,Math.min(16,bs.w*.6))}px serif`;ctx.textAlign='center';ctx.textBaseline='top';
+    ctx.fillText(bs.emoji,bs.x+bs.w/2,bs.y+4);
   });
   const fog=ctx.createLinearGradient(0,0,W,0);
   fog.addColorStop(0,'rgba(10,10,20,.4)');fog.addColorStop(.08,'transparent');fog.addColorStop(.92,'transparent');fog.addColorStop(1,'rgba(10,10,20,.4)');
