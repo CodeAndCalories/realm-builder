@@ -46,6 +46,7 @@ function renderCity(){
   const wrap=document.getElementById('city-canvas-wrap');
   canvas.width=wrap.clientWidth;
   canvas.height=wrap.clientHeight;
+  console.log('Canvas size:',canvas.width,'x',canvas.height);
   const W=canvas.width,H=canvas.height,isNight=(G.tick%40)>20;
   document.getElementById('day-night-label').textContent=isNight?'🌙 NIGHT':'☀️ DAY';
   const sky=ctx.createLinearGradient(0,0,0,H*.7);
