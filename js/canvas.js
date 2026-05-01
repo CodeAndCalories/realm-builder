@@ -46,7 +46,6 @@ function renderCity(){
   const wrap=document.getElementById('city-canvas-wrap');
   canvas.width=wrap.clientWidth;
   canvas.height=wrap.clientHeight;
-  console.log('Canvas size:',canvas.width,'x',canvas.height);
   const W=canvas.width,H=canvas.height,isNight=(G.tick%40)>20;
   document.getElementById('day-night-label').textContent=isNight?'🌙 NIGHT':'☀️ DAY';
   const sky=ctx.createLinearGradient(0,0,0,H*.7);
@@ -54,7 +53,7 @@ function renderCity(){
   ctx.fillStyle=sky; ctx.fillRect(0,0,W,H);
   if(isNight){ctx.fillStyle='rgba(255,255,220,.6)';for(let i=0;i<35;i++)ctx.fillRect((i*137+G.tick)%W,(i*73)%(H*.5),1,1);}
   else{ctx.fillStyle='rgba(255,220,100,.2)';ctx.beginPath();ctx.arc(W*.8,H*.18,28,0,Math.PI*2);ctx.fill();}
-  const groundY=Math.min(H*.82,H-80),gr=ctx.createLinearGradient(0,groundY,0,H);
+  const groundY=Math.min(H*.65,H-80),gr=ctx.createLinearGradient(0,groundY,0,H);
   gr.addColorStop(0,'#2a3a20');gr.addColorStop(.3,'#1e2a16');gr.addColorStop(1,'#111810');
   ctx.fillStyle=gr;ctx.fillRect(0,groundY,W,H);
   ctx.fillStyle='#1a1a1a';ctx.fillRect(0,groundY+2,W,4);
